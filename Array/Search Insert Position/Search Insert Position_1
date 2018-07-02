@@ -1,5 +1,6 @@
 #题目地址：https://leetcode.com/problems/search-insert-position/description/
-#采用二分法查找
+#采用二分法查找，算法复杂度是O(logn)，空间复杂度O(1)
+#优点：就是当循环结束时，如果没有找到目标元素，那么l一定停在恰好比目标大的index上，r一定停在恰好比目标小的index上，所以个人比较推荐这种实现方式。
 class Solution(object):
     def searchInsert(self, nums, target):
         """
