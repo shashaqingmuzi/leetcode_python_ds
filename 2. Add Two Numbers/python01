@@ -1,0 +1,46 @@
+class Solution(object):
+    def addTwoNumbers(self, l1, l2):
+        resultNode = None
+        add = 0
+        while True:
+            #当val为-1的时候，说明已经有list遍历完了，这个时候需要把val变成0
+            if l1.val == -1:
+                l1.val = 0
+            if l2.val == -1:
+                l2.val = 0
+
+            tSum = (l1.val + l2.val + add) % 10
+            add = (l1.val + l2.val + add) / 10
+            listn = ListNode(tSum)
+
+            if resultNode == None:
+                resultNode = listn
+                flagNode = resultNode
+            else:
+                flagNode.next = listn
+                flagNode = flagNode.next
+
+            if l1.next != None:
+                l1 = l1.next
+            else:
+                #直接改变当前的节点的值
+                l1.val = -1
+
+            if l2.next != None:
+                l2 = l2.next
+            else:
+                l2.val = -1
+            #两个都为-1了，说明两个列表都遍历完了
+            if l1.val == -1 and l2.val == -1:
+                break
+
+        if add != 0:
+            listn = ListNode(add)
+            flagNode.next = listn
+
+        return resultNode
+
+作者：乐乐可爱睡觉
+链接：https://www.jianshu.com/p/b98287066140
+來源：简书
+简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。
