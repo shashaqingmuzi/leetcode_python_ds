@@ -34,5 +34,5 @@ class Solution(object):
                 maxp = j - i + 2*k
                 ans = s[i-k:j+k]
             i = j
-        return ans
+        return ans 
                
