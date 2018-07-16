@@ -1,0 +1,46 @@
+#参考博客地址：http://www.cnblogs.com/chruny/p/4801655.html
+#原文对符号的处理有点小bug呀
+class Solution(object):
+    def myAtoi(self, str):
+        """
+        :type str: str
+        :rtype: int
+        """
+        size = len(str)
+        if size == 0:
+            return 0
+        b1 = True
+        b2 = True
+        positive = True
+        ans = 0
+        i = 0
+        while i < size:
+            if str[i] != ' ':
+                b1 = False
+            if str[i] == ' ' and b1:
+                i += 1
+                continue
+            if b2:
+                if str[i] == '-':
+                    i += 1
+                    b2 = False
+                    positive = False
+                    continue
+                if str[i] == '+':
+                    i += 1
+                    b2 = False
+                    continue
+            if str[i] >= '0' and str[i] <= '9':
+                b2 = False
+                ans = ans*10 + int(str[i])
+                i += 1
+                if ans > 2147483647 and positive:
+                    return 2147483647
+                if ans > 2147483648 and not positive:
+                    return -2147483648
+                continue
+            else:
+                break
+        if positive:
+            return ans
+        return -ans
