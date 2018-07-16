@@ -1,0 +1,22 @@
+#2147483647是一个什么样的数字？事实上它就是2的31次方减一。这个数字也就是通常程序中的长整型（或称32位整形）数据的最大值。
+#参考博客:http://www.cnblogs.com/chruny/p/4798828.html
+
+class Solution(object):
+    def reverse(self, x):
+        """
+        :type x: int
+        :rtype: int
+        """
+        positive = True
+        if x < 0:
+            positive = False
+        x = abs(x)
+        ans = 0
+        while x != 0:
+            ans = ans*10 + x%10
+            x //= 10
+        if ans > 2147483647:
+            return 0
+        if not positive:
+            return -ans
+        return ans
