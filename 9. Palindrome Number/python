@@ -1,0 +1,17 @@
+#很常见的一种处理数字的方法
+class Solution(object):
+    def isPalindrome(self, x):
+        """
+        :type x: int
+        :rtype: bool
+        """
+        if x < 0:
+            return False
+        x2 = x
+        ans = 0
+        while x2 > 0:
+            ans = ans*10 + x2%10
+            x2 //= 10
+        if ans == x:
+            return True
+        return False
