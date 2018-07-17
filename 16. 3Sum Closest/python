@@ -1,5 +1,8 @@
-#优化：判断剩下的数中是否最小的两个数相加就大于或者最大两个数就小于target - 第一个数，
+#优化：判断剩下的数中是否  最小的两个数相加就大于  或者  最大两个数就小于  target - 第一个数，
 #如果是，则直接判断最小（大）两个数和②中的那个数的和是不是最接近的值。
+#没有优化的代码运行时间89%左右，优化后的代码运行时间99%左右
+
+#优化后的代码
 class Solution(object):
     def threeSumClosest(self, nums, target):
         """
@@ -36,5 +39,39 @@ class Solution(object):
                     if target - tempp < abs(ans - target):
                         ans  = tempp
                     j += 1
+            i+=1
+        return ans
+
+#未优化的代码：
+class Solution(object):
+    def threeSumClosest(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        size = len(nums)
+        nums.sort()
+        i = 0
+        ans = nums[0] + nums[1] + nums[size-1]
+        while i < size-2:
+            tmp = target - nums[i]
+            j = i + 1
+            k = size - 1
+            while j < k:
+                if nums[j]+nums[k] == tmp:
+                    return target
+                if nums[j]+nums[k] < tmp:
+                    tmpp = nums[i]+nums[j]+nums[k]
+                    if target - tmpp < abs(target- ans):
+                        ans = tmpp
+                    j += 1
+                else:
+                    tmpp = nums[i]+nums[j]+nums[k]
+                    if tmpp-target < abs(target - ans):
+                        ans = tmpp
+                    k -= 1
+                if ans == target:
+                    return target
             i+=1
         return ans
