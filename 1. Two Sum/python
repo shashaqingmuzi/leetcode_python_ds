@@ -1,0 +1,22 @@
+#首先，我们建立一个字典，d = {}，字典的key是数组的值num，value是相应的位置，
+#然后只要满足 num 和 target - num都在字典里面则找到答案。这种方法的时间复杂度是（O（n））。
+class Solution(object):
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        d = {}
+        size = len(nums)
+        i = 0
+        ans = []
+        while i < size:
+            if nums[i] not in d:
+                d[nums[i]] = i
+            if target - nums[i] in d:
+                if d[target-nums[i]] < i:
+                    ans = [d[target - nums[i]],i]
+                    break
+            i += 1
+        return ans
