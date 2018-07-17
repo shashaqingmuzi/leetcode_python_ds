@@ -1,0 +1,49 @@
+#和3 sum 还挺像的
+class Solution(object):
+    def fourSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[List[int]]
+        """
+        size = len(nums)
+        ans = []
+        if size < 4:
+            return ans
+        i = 0
+        nums.sort()
+        while i < size - 3:
+            j =i + 1
+            while j < size - 2:
+                m = j + 1
+                n = size -1
+                tmp = target - nums[i] - nums[j]
+                while m < n:
+                    if nums[m] + nums[m+1] > tmp or nums[n]+nums[n-1] < tmp:
+                        break
+                    if nums[m] + nums[n] == tmp:
+                        ans.append([nums[i],nums[j],nums[m],nums[n]])
+                        m += 1
+                        n -= 1
+                        while m<n:
+                            if nums[m] == nums[m-1]:
+                                m += 1
+                            if nums[n] == nums[n+1]:
+                                n -= 1
+                            if nums[m] != nums[m-1] and nums[n] != nums[n+1]:
+                                break
+                    if nums[m] + nums[n] < tmp:
+                        m += 1
+                    if nums[m] + nums[n] > tmp:
+                        n -= 1
+                j += 1
+                while j < size - 2:
+                    if nums[j] != nums[j - 1]:
+                        break
+                    j += 1
+            i+=1
+            while i < size - 3:
+                if nums[i] != nums[i-1]:
+                    break
+                i += 1
+        return ans
