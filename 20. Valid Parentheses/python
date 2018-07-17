@@ -1,0 +1,29 @@
+class Solution(object):
+    def match(self,tmp2,i):
+        if i == ')' and tmp2 == '(':
+            return True
+        if i == ']' and tmp2 == '[':
+            return True
+        if i == '}' and tmp2 == '{':
+            return True
+        return False
+    
+    def isValid(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        tmp = []
+        for i in s:
+            if i == '(' or i == '[' or i == '{':
+                tmp.append(i)
+            if i == ')' or i == ']' or i == '}':
+                if len(tmp) == 0:
+                    return False
+                tmp2 = tmp.pop()
+                if not self.match(tmp2,i):
+                    return False
+        if len(tmp) == 0:
+            return True
+        return False 
+                    
