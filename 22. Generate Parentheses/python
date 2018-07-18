@@ -1,0 +1,27 @@
+#参考博客的思路：http://www.cnblogs.com/chruny/p/4872830.html
+
+class Solution(object):
+    def generateParenthesis(self, n):
+        """
+        :type n: int
+        :rtype: List[str]
+        """
+        ans = []
+        if n == 0:
+            return ans
+        if n == 1:
+            return ['()']
+        i = 0
+        while i < n:
+            tmp1 = self.generateParenthesis(i)
+            tmp2 = self.generateParenthesis(n - i -1)
+            for j in tmp1:
+                for k in tmp2:
+                    ans.append('('+j+')'+k)
+                if len(tmp2) == 0:
+                    ans.append('('+j+')')
+            if len(tmp1) == 0:
+                for k in tmp2:
+                    ans.append('()'+k)
+            i += 1
+        return ans
