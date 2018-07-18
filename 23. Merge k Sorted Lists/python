@@ -1,0 +1,60 @@
+#前面我们已经给出了两个有序链表整合的做法。
+#这里，我们不妨用归并排序的想法，把n个链表看成 n/2 和n - n/2的整合，直到n/2 <= 1。
+#时间复杂度是 O(n * （2^log k）) = O(n * k).
+
+
+
+
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution(object):
+    def mergeTwoLists(self,l1,l2):
+        ans = ListNode(0)
+        tmp = ans
+        if l1 == None and l2 == None:
+            return None
+        while l1 != None or l2 != None:
+            if l1 == None:
+                while l2 != None:
+                    tmp.val = l2.val
+                    l2 = l2.next
+                    if l2 == None:
+                        break
+                    tmp.next = ListNode(0)
+                    tmp = tmp.next
+                break
+            if l2 == None:
+                while l1 != None:
+                    tmp.val = l1.val
+                    l1 = l1.next
+                    if l1  == None:
+                        break
+                    tmp.next = ListNode(0)
+                    tmp = tmp.next
+                break
+            if l1.val <= l2.val:
+                tmp.val = l1.val
+                l1 = l1.next
+            else:
+                tmp.val = l2.val
+                l2 = l2.next
+            tmp.next = ListNode(0)
+            tmp = tmp.next
+        return ans
+    def mergeKLists(self, lists):
+        """
+        :type lists: List[ListNode]
+        :rtype: ListNode
+        """
+        if len(lists) == 0:
+            return None
+        if len(lists) == 1:
+            return lists[0]
+        n = len(lists)//2
+        tmp1 = self.mergeKLists(lists[:n])
+        tmp2 = self.mergeKLists(lists[n:])
+        return self.mergeTwoLists(tmp1,tmp2)
