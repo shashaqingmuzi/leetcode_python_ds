@@ -1,4 +1,5 @@
 #用了九牛二虎之力才看懂的链表。。。
+#参考博客：https://blog.csdn.net/jiangjiang_jian/article/details/79490858
 
 # Definition for singly-linked list.
 # class ListNode(object):
