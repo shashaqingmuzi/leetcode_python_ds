@@ -1,0 +1,25 @@
+#用了九牛二虎之力才看懂的链表。。。
+
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution(object):
+    def swapPairs(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        ans = ListNode(0)
+        ans.next = head
+        pre = ans
+        curr = head
+        while curr and curr.next:
+            pre.next = curr.next
+            curr.next = curr.next.next
+            pre.next.next = curr
+            pre = curr
+            curr = curr.next
+        return ans.next
